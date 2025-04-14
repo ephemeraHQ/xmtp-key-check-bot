@@ -105,7 +105,7 @@ async function main() {
     try {
       const inboxState = await client.preferences.inboxStateFromInboxIds([
         targetInboxId,
-      ]);
+      ], true);
       
       if (!inboxState || inboxState.length === 0) {
         await conversation.send(`No inbox state found for ${targetInboxId}`);
