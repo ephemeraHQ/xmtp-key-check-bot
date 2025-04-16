@@ -1,6 +1,6 @@
 import { createSigner, getEncryptionKeyFromHex } from "./helpers/client";
 import { logAgentDetails, validateEnvironment } from "./helpers/utils";
-import { Client, IdentifierKind, KeyPackageStatus, type XmtpEnv } from "@xmtp/node-sdk";
+import { Client, GroupMember, IdentifierKind, KeyPackageStatus, type XmtpEnv } from "@xmtp/node-sdk";
 
 /* Get the wallet key associated to the public key of
  * the agent and the encryption key for the local db
@@ -69,6 +69,7 @@ async function main() {
         "/key-check inboxid <INBOX_ID> - Check key package status for a specific inbox ID\n" +
         "/key-check address <ADDRESS> - Check key package status for a specific address\n" +
         "/key-check groupid - Show the current conversation ID\n" +
+        "/key-check members - List all members' inbox IDs in the current conversation\n" +
         "/key-check help - Show this help message";
       
       await conversation.send(helpText);
@@ -80,6 +81,34 @@ async function main() {
     if (command === "groupid") {
       await conversation.send(`Conversation ID: "${message.conversationId}"`);
       console.log(`Sent conversation ID: ${message.conversationId}`);
+      continue;
+    }
+
+    // Handle members command
+    if (command === "members") {
+      const members: GroupMember[] = await conversation.members();
+      
+      if (!members || members.length === 0) {
+        await conversation.send("No members found in this conversation.");
+        console.log("No members found in the conversation");
+        continue;
+      }
+      
+      let membersList = "Group members:\n\n";
+      
+      for (const member of members) {
+        const isBot = member.inboxId.toLowerCase() === client.inboxId.toLowerCase();
+        let marker = isBot ? "~" : "  ";
+        const isSender = member.inboxId.toLowerCase() === message.senderInboxId.toLowerCase();
+        marker = isSender ? "*" : marker;
+        membersList += `${marker}${member.inboxId}${marker}\n`;
+      }
+      
+      membersList += "\n ~indicates key-check bot's inbox ID~";
+      membersList += "\n *indicates who prompted the key-check command*";
+      
+      await conversation.send(membersList);
+      console.log(`Sent list of ${members.length} members`);
       continue;
     }
     
