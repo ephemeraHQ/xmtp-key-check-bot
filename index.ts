@@ -51,7 +51,7 @@ async function main() {
     const content = message.content as string;
     
     // Only process messages that start with "/key-check"
-    if (!content.trim().startsWith("/key-check")) {
+    if (!content.trim().startsWith("/key-check") && !content.trim().startsWith("/kc")) {
       continue;
     }
 
@@ -59,6 +59,7 @@ async function main() {
     
     // Parse the command
     const parts = content.trim().split(/\s+/);
+    const prefix = parts[0].toLowerCase();
     const command = parts.length > 1 ? parts[1] : "";
     
     if (command === "help") {
@@ -70,8 +71,9 @@ async function main() {
         "/key-check address <ADDRESS> - Check key package status for a specific address\n" +
         "/key-check groupid - Show the current conversation ID\n" +
         "/key-check members - List all members' inbox IDs in the current conversation\n" +
-        "/key-check help - Show this help message";
-      
+        "/key-check help - Show this help message\n" +
+        "Note: You can use /kc as a shorthand for all commands (e.g., /kc help)";
+
       await conversation.send(helpText);
       console.log("Sent help information");
       continue;
