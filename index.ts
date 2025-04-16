@@ -100,10 +100,10 @@ async function main() {
       
       for (const member of members) {
         const isBot = member.inboxId.toLowerCase() === client.inboxId.toLowerCase();
-        let marker = isBot ? "~" : "  ";
+        let marker = isBot ? "~" : " ";
         const isSender = member.inboxId.toLowerCase() === message.senderInboxId.toLowerCase();
         marker = isSender ? "*" : marker;
-        membersList += `${marker}${member.inboxId}${marker}\n`;
+        membersList += `${marker}${member.inboxId}${marker}\n\n`;
       }
       
       membersList += "\n ~indicates key-check bot's inbox ID~";
