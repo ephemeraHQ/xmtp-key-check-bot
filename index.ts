@@ -68,10 +68,18 @@ async function main() {
         "/key-check - Check key package status for the sender\n" +
         "/key-check inboxid <INBOX_ID> - Check key package status for a specific inbox ID\n" +
         "/key-check address <ADDRESS> - Check key package status for a specific address\n" +
+        "/key-check groupid - Show the current conversation ID\n" +
         "/key-check help - Show this help message";
       
       await conversation.send(helpText);
       console.log("Sent help information");
+      continue;
+    }
+    
+    // Handle groupid command
+    if (command === "groupid") {
+      await conversation.send(`Conversation ID: "${message.conversationId}"`);
+      console.log(`Sent conversation ID: ${message.conversationId}`);
       continue;
     }
     
