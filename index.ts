@@ -26,7 +26,8 @@ const signer = createSigner(WALLET_KEY);
 const encryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
 
 async function main() {
-  const client = await Client.create(signer, encryptionKey, {
+  const client = await Client.create(signer, {
+    dbEncryptionKey: encryptionKey,
     env: XMTP_ENV as XmtpEnv,
   });
 
@@ -99,8 +100,8 @@ async function main() {
 
     // Handle version command
     if (command === "version") {
-      await conversation.send(`XMTP SDK Version: ${xmtpSdkVersion}`);
-      console.log(`Sent XMTP SDK version: ${xmtpSdkVersion}`);
+      await conversation.send(`XMTP node-sdk Version: ${xmtpSdkVersion}`);
+      console.log(`Sent XMTP node-sdk version: ${xmtpSdkVersion}`);
       continue;
     }
 
