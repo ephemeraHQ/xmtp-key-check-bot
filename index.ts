@@ -1,6 +1,16 @@
 import { createSigner, getEncryptionKeyFromHex } from "./helpers/client";
 import { logAgentDetails, validateEnvironment } from "./helpers/utils";
 import { Client, GroupMember, IdentifierKind, KeyPackageStatus, type XmtpEnv } from "@xmtp/node-sdk";
+import { createRequire } from 'node:module';
+import { readFileSync } from 'node:fs';
+
+const require = createRequire(import.meta.url);
+// Absolute path to *that* copy of the dependency's package.json
+const pkgJsonPath = require.resolve('@xmtp/node-sdk/package.json');
+const { version: xmtpSdkVersion } =
+  JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
+
+console.log(`XMTP node-sdk: v${xmtpSdkVersion}`);
 
 /* Get the wallet key associated to the public key of
  * the agent and the encryption key for the local db
@@ -71,6 +81,7 @@ async function main() {
         "/key-check address <ADDRESS> - Check key package status for a specific address\n" +
         "/key-check groupid - Show the current conversation ID\n" +
         "/key-check members - List all members' inbox IDs in the current conversation\n" +
+        "/key-check version - Show XMTP SDK version information\n" +
         "/key-check help - Show this help message\n" +
         "Note: You can use /kc as a shorthand for all commands (e.g., /kc help)";
 
@@ -83,6 +94,13 @@ async function main() {
     if (command === "groupid") {
       await conversation.send(`Conversation ID: "${message.conversationId}"`);
       console.log(`Sent conversation ID: ${message.conversationId}`);
+      continue;
+    }
+
+    // Handle version command
+    if (command === "version") {
+      await conversation.send(`XMTP SDK Version: ${xmtpSdkVersion}`);
+      console.log(`Sent XMTP SDK version: ${xmtpSdkVersion}`);
       continue;
     }
 
