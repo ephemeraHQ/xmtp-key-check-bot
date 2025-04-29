@@ -40,10 +40,12 @@ async function main() {
     await client.conversations.sync();
 
     console.log("Waiting for messages...");
+
+    let stream;
     
     while (true) {
       try {
-        const stream = await client.conversations.streamAllMessages();
+        stream = await client.conversations.streamAllMessages();
 
         for await (const message of stream) {
           try {
@@ -82,6 +84,7 @@ async function main() {
         }
       } catch (streamError) {
         console.error("Stream error, reconnecting in 5 seconds:", streamError);
+        stream.cancel();
         // Wait 5 seconds before reconnecting
         await new Promise(resolve => setTimeout(resolve, 5000));
       }
