@@ -27,7 +27,6 @@ const encryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
 
 async function main() {
   const client = await Client.create(signer, {
-    historySyncUrl: null,
     dbEncryptionKey: encryptionKey,
     env: XMTP_ENV as XmtpEnv,
   });
