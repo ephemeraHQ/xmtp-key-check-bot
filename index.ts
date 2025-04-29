@@ -39,7 +39,9 @@ async function main() {
   await client.conversations.sync();
 
   console.log("Waiting for messages...");
-  const stream = await client.conversations.streamAllMessages();
+  try {
+    const stream = await client.conversations.streamAllMessages();
+  
 
   for await (const message of stream) {
     if (
@@ -223,6 +225,9 @@ async function main() {
     }
 
     console.log("Waiting for messages...");
+  }
+} catch (error) {
+    console.error("Error streaming messages:", error);
   }
 }
 
