@@ -46,6 +46,7 @@ async function main() {
       message?.senderInboxId.toLowerCase() === client.inboxId.toLowerCase() ||
       message?.contentType?.typeId !== "text"
     ) {
+      console.log("Skipping message, from us or not text");
       continue;
     }
 
