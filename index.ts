@@ -41,6 +41,7 @@ async function main() {
   console.log("Waiting for messages...");
   try {
     const stream = await client.conversations.streamAllMessages();
+    // const conversationStream = await client.conversations.stream();
   
 
   for await (const message of stream) {
