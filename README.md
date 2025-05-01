@@ -25,22 +25,12 @@ ENCRYPTION_KEY= # encryption key for the local database
 XMTP_ENV=dev # local, dev, production
 ```
 
-> [!WARNING]
-> Running the `gen:keys` command will append keys to your existing `.env` file.
-
 ### Run the agent
 
 ```bash
-# git clone repo
-git clone https://github.com/ephemeraHQ/xmtp-agent-examples.git
-# go to the folder
-cd xmtp-agent-examples
-cd examples/xmtp-key-check
 # install packages
 yarn
-# generate random xmtp keys (optional)
-yarn gen:keys
-# run the example
+# run the bot
 yarn dev
 ```
 
@@ -48,10 +38,15 @@ yarn dev
 
 Once the agent is running, you can interact with it using the following commands:
 
-- `/key-check` - Check key package status for your address
+- `/key-check` - Check key package status for the sender
 - `/key-check inboxid <INBOX_ID>` - Check key package status for a specific inbox ID
 - `/key-check address <ADDRESS>` - Check key package status for a specific address
+- `/key-check groupid` - Show the current conversation ID
+- `/key-check members` - List all members' inbox IDs in the current conversation
+- `/key-check version` - Show XMTP SDK version information
 - `/key-check help` - Show the help message with available commands
+
+Note: You can use `/kc` as a shorthand for all commands (e.g., `/kc help`)
 
 The agent will respond with information about the key packages, including:
 - Total number of installations
