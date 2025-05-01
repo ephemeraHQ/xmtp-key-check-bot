@@ -31,6 +31,8 @@ async function main() {
     env: XMTP_ENV as XmtpEnv,
   });
 
+  await client.revokeAllOtherInstallations();
+
   const identifier = await signer.getIdentifier();
   const address = identifier.identifier;
   logAgentDetails(address, client.inboxId, XMTP_ENV);
