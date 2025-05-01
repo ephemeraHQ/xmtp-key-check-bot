@@ -29,10 +29,10 @@ async function main() {
   const client = await Client.create(signer, {
     dbEncryptionKey: encryptionKey,
     env: XMTP_ENV as XmtpEnv,
-    loggingLevel: LogLevel.debug,
+    // loggingLevel: LogLevel.debug,
   });
 
-  await client.revokeAllOtherInstallations();
+  // await client.revokeAllOtherInstallations();
 
   const identifier = await signer.getIdentifier();
   const address = identifier.identifier;
@@ -41,11 +41,14 @@ async function main() {
   console.log("✓ Syncing conversations...");
   await client.conversations.sync();
 
+  let conversations = await client.conversations.list();
+
+  // Print the list of conversations ids to console:
+  console.log("Conversations:", conversations.map((conversation) => conversation.id));
+
   console.log("Waiting for messages...");
   try {
     const stream = await client.conversations.streamAllMessages();
-    // const conversationStream = await client.conversations.stream();
-  
 
   for await (const message of stream) {
     if (
@@ -90,6 +93,7 @@ async function main() {
         "/key-check groupid - Show the current conversation ID\n" +
         "/key-check members - List all members' inbox IDs in the current conversation\n" +
         "/key-check version - Show XMTP SDK version information\n" +
+        "/key-check debug - Show debug information for the key-check bot\n" +
         "/key-check help - Show this help message\n" +
         "Note: You can use /kc as a shorthand for all commands (e.g., /kc help)";
 
@@ -109,6 +113,15 @@ async function main() {
     if (command === "version") {
       await conversation.send(`XMTP node-sdk Version: ${xmtpSdkVersion}`);
       console.log(`Sent XMTP node-sdk version: ${xmtpSdkVersion}`);
+      continue;
+    }
+
+    // Handle debug command
+    if (command === "debug") {
+      let conversations = await client.conversations.list();
+      // Print the list of conversations ids to console:
+      console.log("Conversations:", conversations.map((conversation) => conversation.id));
+      await conversation.send(`key-check conversations: \n${conversations.map((conversation) => conversation.id).join('\n')}`);
       continue;
     }
 
