@@ -1,6 +1,6 @@
 import { createSigner, getEncryptionKeyFromHex } from "./helpers/client";
 import { logAgentDetails, validateEnvironment } from "./helpers/utils";
-import { Client, GroupMember, IdentifierKind, KeyPackageStatus, type XmtpEnv } from "@xmtp/node-sdk";
+import { Client, GroupMember, IdentifierKind, KeyPackageStatus, LogLevel, type XmtpEnv } from "@xmtp/node-sdk";
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
 
@@ -29,6 +29,7 @@ async function main() {
   const client = await Client.create(signer, {
     dbEncryptionKey: encryptionKey,
     env: XMTP_ENV as XmtpEnv,
+    loggingLevel: LogLevel.debug,
   });
 
   await client.revokeAllOtherInstallations();
