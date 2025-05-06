@@ -29,10 +29,10 @@ async function main() {
   const client = await Client.create(signer, {
     dbEncryptionKey: encryptionKey,
     env: XMTP_ENV as XmtpEnv,
-    // loggingLevel: LogLevel.debug,
+    loggingLevel: LogLevel.debug,
   });
 
-  // await client.revokeAllOtherInstallations();
+  await client.revokeAllOtherInstallations();
 
   const identifier = await signer.getIdentifier();
   const address = identifier.identifier;
