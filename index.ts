@@ -26,13 +26,14 @@ const signer = createSigner(WALLET_KEY);
 const encryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
 
 async function main() {
+  const startTime = new Date();
   const client = await Client.create(signer, {
     dbEncryptionKey: encryptionKey,
     env: XMTP_ENV as XmtpEnv,
     loggingLevel: LogLevel.debug,
   });
 
-  await client.revokeAllOtherInstallations();
+  // await client.revokeAllOtherInstallations();
 
   const identifier = await signer.getIdentifier();
   const address = identifier.identifier;
@@ -93,6 +94,7 @@ async function main() {
         "/key-check groupid - Show the current conversation ID\n" +
         "/key-check members - List all members' inbox IDs in the current conversation\n" +
         "/key-check version - Show XMTP SDK version information\n" +
+        "/key-check uptime - Show when the bot started and how long it has been running\n" +
         "/key-check debug - Show debug information for the key-check bot\n" +
         "/key-check help - Show this help message\n" +
         "Note: You can use /kc as a shorthand for all commands (e.g., /kc help)";
@@ -113,6 +115,25 @@ async function main() {
     if (command === "version") {
       await conversation.send(`XMTP node-sdk Version: ${xmtpSdkVersion}`);
       console.log(`Sent XMTP node-sdk version: ${xmtpSdkVersion}`);
+      continue;
+    }
+
+    // Handle uptime command
+    if (command === "uptime") {
+      const currentTime = new Date();
+      const uptimeMs = currentTime.getTime() - startTime.getTime();
+      
+      // Convert milliseconds to days, hours, minutes, seconds
+      const days = Math.floor(uptimeMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((uptimeMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((uptimeMs % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((uptimeMs % (1000 * 60)) / 1000);
+      
+      const uptimeText = `Bot started at: ${startTime.toLocaleString()}\n` +
+        `Uptime: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      
+      await conversation.send(uptimeText);
+      console.log(`Sent uptime information: ${uptimeText}`);
       continue;
     }
 
