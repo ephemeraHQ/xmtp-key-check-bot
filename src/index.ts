@@ -1,7 +1,8 @@
-import { createSigner,  getEncryptionKeyFromHex, validateEnvironment    ,logAgentDetails } from "../helpers/client";
+import { createSigner,  getEncryptionKeyFromHex, validateEnvironment    ,logAgentDetails, getDbPath } from "../helpers/client";
 import { Client, GroupMember, IdentifierKind, KeyPackageStatus, LogLevel, type XmtpEnv } from "@xmtp/node-sdk";
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
+import { env } from "node:process";
 
 const require = createRequire(import.meta.url);
 // Absolute path to *that* copy of the dependency's package.json
@@ -26,10 +27,13 @@ const encryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
 
 async function main() {
   const startTime = new Date();
+  console.log(`Creating client on the '${XMTP_ENV}' network...`);
+  const signerIdentifier = (await signer.getIdentifier()).identifier;
   const client = await Client.create(signer, {
     dbEncryptionKey: encryptionKey,
+    dbPath: getDbPath(XMTP_ENV + "-" + signerIdentifier  ),  
     env: XMTP_ENV as XmtpEnv,
-    loggingLevel: LogLevel.debug,
+    loggingLevel: process.env.LOGGING_LEVEL as LogLevel,
   });
 
   // await client.revokeAllOtherInstallations();
