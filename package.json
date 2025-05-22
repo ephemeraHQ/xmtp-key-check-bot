@@ -1,27 +1,24 @@
 {
-  "name": "@examples/xmtp-inbox-status-check",
-  "version": "0.0.1",
+  "name": "xmtp-key-check-bot",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "echo skipping build",
-    "dev": "tsx --watch index.ts",
-    "gen:keys": "tsx ../../scripts/generateKeys.ts",
-    "lint": "cd ../.. && yarn eslint examples/xmtp-gm",
-    "start": "tsx index.ts"
+    "build": "tsc",
+    "start": "tsx src/index.ts",
+    "dev": "tsx --watch src/index.ts"
   },
   "dependencies": {
-    "@xmtp/content-type-wallet-send-calls": "^1.0.0",
-    "@xmtp/node-sdk": "2.0.9",
-    "dotenv": "^16.5.0",
+    "@xmtp/node-sdk": "2.1.0-rc3",
     "uint8arrays": "^5.1.0",
-    "viem": "^2.26.3"
+    "viem": "^2.22.17"
   },
   "devDependencies": {
-    "tsx": "^4.19.2",
+    "@types/node": "^20.14.2",
+    "dotenv": "^16.4.5",
+    "tsx": "^4.19.3",
     "typescript": "^5.7.3"
   },
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.9.1",
   "engines": {
     "node": ">=20"
   }

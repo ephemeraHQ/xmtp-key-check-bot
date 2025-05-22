@@ -187,20 +187,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@examples/xmtp-inbox-status-check@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@examples/xmtp-inbox-status-check@workspace:."
-  dependencies:
-    "@xmtp/content-type-wallet-send-calls": "npm:^1.0.0"
-    "@xmtp/node-sdk": "npm:2.0.9"
-    dotenv: "npm:^16.5.0"
-    tsx: "npm:^4.19.2"
-    typescript: "npm:^5.7.3"
-    uint8arrays: "npm:^5.1.0"
-    viem: "npm:^2.26.3"
-  languageName: unknown
-  linkType: soft
-
 "@fastify/busboy@npm:^2.0.0":
   version: 2.1.1
   resolution: "@fastify/busboy@npm:2.1.1"
@@ -231,7 +217,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/curves@npm:1.8.1, @noble/curves@npm:^1.6.0, @noble/curves@npm:~1.8.1":
+"@noble/curves@npm:1.8.2":
+  version: 1.8.2
+  resolution: "@noble/curves@npm:1.8.2"
+  dependencies:
+    "@noble/hashes": "npm:1.7.2"
+  checksum: 10c0/e7ef119b114681d6b7530b29a21f9bbea6fa6973bc369167da2158d05054cc6e6dbfb636ba89fad7707abacc150de30188b33192f94513911b24bdb87af50bbd
+  languageName: node
+  linkType: hard
+
+"@noble/curves@npm:^1.6.0, @noble/curves@npm:~1.8.1":
   version: 1.8.1
   resolution: "@noble/curves@npm:1.8.1"
   dependencies:
@@ -244,6 +239,13 @@ __metadata:
   version: 1.7.1
   resolution: "@noble/hashes@npm:1.7.1"
   checksum: 10c0/2f8ec0338ccc92b576a0f5c16ab9c017a3a494062f1fbb569ae641c5e7eab32072f9081acaa96b5048c0898f972916c818ea63cbedda707886a4b5ffcfbf94e3
+  languageName: node
+  linkType: hard
+
+"@noble/hashes@npm:1.7.2":
+  version: 1.7.2
+  resolution: "@noble/hashes@npm:1.7.2"
+  checksum: 10c0/b1411eab3c0b6691d847e9394fe7f1fcd45eeb037547c8f97e7d03c5068a499b4aef188e8e717eee67389dca4fee17d69d7e0f58af6c092567b0b76359b114b2
   languageName: node
   linkType: hard
 
@@ -386,6 +388,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^20.14.2":
+  version: 20.17.50
+  resolution: "@types/node@npm:20.17.50"
+  dependencies:
+    undici-types: "npm:~6.19.2"
+  checksum: 10c0/98a4f394c22b93e1bb37b3cfdfa5df7b79fcab19dafe80fe19e94126f897a8d2b3d58a4b680dc15591c5660bdd2f1ae49d6c59e7cbe7fc0c7cf433b0b984b389
+  languageName: node
+  linkType: hard
+
 "@xmtp/content-type-group-updated@npm:^2.0.2":
   version: 2.0.2
   resolution: "@xmtp/content-type-group-updated@npm:2.0.2"
@@ -393,15 +404,6 @@ __metadata:
     "@xmtp/content-type-primitives": "npm:^2.0.2"
     "@xmtp/proto": "npm:^3.78.0"
   checksum: 10c0/6a607b04d4ee92e4fbb374b3a347b9183d8e8c290cd3f6999d9480d85e9df7602b8c7f377ac36cf1c97f1cb412a014a0f493e91be8be4daa1c382d2152ccf960
-  languageName: node
-  linkType: hard
-
-"@xmtp/content-type-primitives@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@xmtp/content-type-primitives@npm:2.0.1"
-  dependencies:
-    "@xmtp/proto": "npm:^3.78.0"
-  checksum: 10c0/dd53fc024363ea5d552ef2bd287fb5e0e5271bba232c8244d104e95485d1ae12fea387f7b7c2c8cf2fe8a894c079a09f31dd1096bae80508f5b163ac42c66561
   languageName: node
   linkType: hard
 
@@ -423,32 +425,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-wallet-send-calls@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@xmtp/content-type-wallet-send-calls@npm:1.0.0"
-  dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.1"
-  checksum: 10c0/6be527c44fc917dff05fe92af49b57b261438b083f56e7a591bf0a3eee3558da1c81f3b151cf5724279d4aacf4e501b636491b053ae8454128e9af2c126929fe
+"@xmtp/node-bindings@npm:1.2.0-rc3":
+  version: 1.2.0-rc3
+  resolution: "@xmtp/node-bindings@npm:1.2.0-rc3"
+  checksum: 10c0/f9385526b1486dc5c27fcb0b8946174502ec145ded3bd026ad21acb40102f35d07b6e2d538b778fbf2de0f5ca95c34efe6020d58adf64c3e3edb9137eb0692ac
   languageName: node
   linkType: hard
 
-"@xmtp/node-bindings@npm:1.1.8":
-  version: 1.1.8
-  resolution: "@xmtp/node-bindings@npm:1.1.8"
-  checksum: 10c0/60a938826f94bea4b3b7ba2371b4259d7bd4a8405a7caa884145f4727c3a314a1fec403edcd67647b1535e4856cb9ffb9cc62f54eb15679cd2b0e36aeea74b2c
-  languageName: node
-  linkType: hard
-
-"@xmtp/node-sdk@npm:2.0.9":
-  version: 2.0.9
-  resolution: "@xmtp/node-sdk@npm:2.0.9"
+"@xmtp/node-sdk@npm:2.1.0-rc3":
+  version: 2.1.0-rc3
+  resolution: "@xmtp/node-sdk@npm:2.1.0-rc3"
   dependencies:
     "@xmtp/content-type-group-updated": "npm:^2.0.2"
     "@xmtp/content-type-primitives": "npm:^2.0.2"
     "@xmtp/content-type-text": "npm:^2.0.2"
-    "@xmtp/node-bindings": "npm:1.1.8"
+    "@xmtp/node-bindings": "npm:1.2.0-rc3"
     "@xmtp/proto": "npm:^3.78.0"
-  checksum: 10c0/57e97644484cfde2c3237cbd4477d8c4124d77131ee633809899ce06b7f90d226afb2f21089553aa6e4f36d116ecd229ff59083f8bd8c2ac58ef0114a745d272
+  checksum: 10c0/21e8364cc944495d1f76370d26e853024b24910e6f81e40044f073a6811be8efe2ed06b77b6e7d8079e721a512d0d2ccae775518c9126156b7283898fffc200d
   languageName: node
   linkType: hard
 
@@ -605,7 +598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^16.5.0":
+"dotenv@npm:^16.4.5":
   version: 16.5.0
   resolution: "dotenv@npm:16.5.0"
   checksum: 10c0/5bc94c919fbd955bf0ba44d33922a1e93d1078e64a1db5c30faeded1d996e7a83c55332cb8ea4fae5a9ca4d0be44cbceb95c5811e70f9f095298df09d1997dd9
@@ -912,12 +905,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"isows@npm:1.0.6":
-  version: 1.0.6
-  resolution: "isows@npm:1.0.6"
+"isows@npm:1.0.7":
+  version: 1.0.7
+  resolution: "isows@npm:1.0.7"
   peerDependencies:
     ws: "*"
-  checksum: 10c0/f89338f63ce2f497d6cd0f86e42c634209328ebb43b3bdfdc85d8f1589ee75f02b7e6d9e1ba274101d0f6f513b1b8cbe6985e6542b4aaa1f0c5fd50d9c1be95c
+  checksum: 10c0/43c41fe89c7c07258d0be3825f87e12da8ac9023c5b5ae6741ec00b2b8169675c04331ea73ef8c172d37a6747066f4dc93947b17cd369f92828a3b3e741afbda
   languageName: node
   linkType: hard
 
@@ -1392,9 +1385,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.19.2":
-  version: 4.19.3
-  resolution: "tsx@npm:4.19.3"
+"tsx@npm:^4.19.3":
+  version: 4.19.4
+  resolution: "tsx@npm:4.19.4"
   dependencies:
     esbuild: "npm:~0.25.0"
     fsevents: "npm:~2.3.3"
@@ -1404,7 +1397,7 @@ __metadata:
       optional: true
   bin:
     tsx: dist/cli.mjs
-  checksum: 10c0/cacfb4cf1392ae10e8e4fe032ad26ccb07cd8a3b32e5a0da270d9c48d06ee74f743e4a84686cbc9d89b48032d59bbc56cd911e076f53cebe61dc24fa525ff790
+  checksum: 10c0/f7b8d44362343fbde1f2ecc9832d243a450e1168dd09702a545ebe5f699aa6912e45b431a54b885466db414cceda48e5067b36d182027c43b2c02a4f99d8721e
   languageName: node
   linkType: hard
 
@@ -1434,6 +1427,13 @@ __metadata:
   dependencies:
     multiformats: "npm:^13.0.0"
   checksum: 10c0/e7587f97d03a17a608becd01b3ca52aa6db43e7ee6156c18b278c715a62f4f9e62ef2fe9432a3cd02791b6222a17578476a20b8e3ea37dd3b5ce454c6a8782a9
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~6.19.2":
+  version: 6.19.8
+  resolution: "undici-types@npm:6.19.8"
+  checksum: 10c0/078afa5990fba110f6824823ace86073b4638f1d5112ee26e790155f481f2a868cc3e0615505b6f4282bdf74a3d8caad715fd809e870c2bb0704e3ea6082f344
   languageName: node
   linkType: hard
 
@@ -1471,16 +1471,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"viem@npm:^2.26.3":
-  version: 2.26.3
-  resolution: "viem@npm:2.26.3"
+"viem@npm:^2.22.17":
+  version: 2.30.0
+  resolution: "viem@npm:2.30.0"
   dependencies:
-    "@noble/curves": "npm:1.8.1"
-    "@noble/hashes": "npm:1.7.1"
+    "@noble/curves": "npm:1.8.2"
+    "@noble/hashes": "npm:1.7.2"
     "@scure/bip32": "npm:1.6.2"
     "@scure/bip39": "npm:1.5.4"
     abitype: "npm:1.0.8"
-    isows: "npm:1.0.6"
+    isows: "npm:1.0.7"
     ox: "npm:0.6.9"
     ws: "npm:8.18.1"
   peerDependencies:
@@ -1488,7 +1488,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/c808c0fb066bd55b6b726e546c3eb809ac3d1d8c163b197927c042579c65966686072607e5baf5a7667050248f332de8c7a44caa321954682ca8576dc1c152c3
+  checksum: 10c0/28b87b39734674b2c03a01b98b9493275483aabeec52e17d6f83304c4efc393af9a824ead8c8861735547692ee7539322e1d320b7bfffa4d07fabff7521b123a
   languageName: node
   linkType: hard
 
@@ -1550,6 +1550,20 @@ __metadata:
   checksum: 10c0/e498965d6938c63058c4310ffb6967f07d4fa06789d3364829028af380d299fe05762961742971c764973dce3d1f6a2633fe8b2d9410c9b52e534b4b882a99fa
   languageName: node
   linkType: hard
+
+"xmtp-key-check-bot@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "xmtp-key-check-bot@workspace:."
+  dependencies:
+    "@types/node": "npm:^20.14.2"
+    "@xmtp/node-sdk": "npm:2.1.0-rc3"
+    dotenv: "npm:^16.4.5"
+    tsx: "npm:^4.19.3"
+    typescript: "npm:^5.7.3"
+    uint8arrays: "npm:^5.1.0"
+    viem: "npm:^2.22.17"
+  languageName: unknown
+  linkType: soft
 
 "yallist@npm:^4.0.0":
   version: 4.0.0

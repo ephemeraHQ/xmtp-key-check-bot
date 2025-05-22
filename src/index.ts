@@ -1,8 +1,8 @@
-import { createSigner, getEncryptionKeyFromHex } from "./helpers/client";
-import { logAgentDetails, validateEnvironment } from "./helpers/utils";
+import { createSigner,  getEncryptionKeyFromHex, validateEnvironment    ,logAgentDetails, getDbPath } from "../helpers/client";
 import { Client, GroupMember, IdentifierKind, KeyPackageStatus, LogLevel, type XmtpEnv } from "@xmtp/node-sdk";
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
+import { env } from "node:process";
 
 const require = createRequire(import.meta.url);
 // Absolute path to *that* copy of the dependency's package.json
@@ -27,17 +27,18 @@ const encryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
 
 async function main() {
   const startTime = new Date();
+  console.log(`Creating client on the '${XMTP_ENV}' network...`);
+  const signerIdentifier = (await signer.getIdentifier()).identifier;
   const client = await Client.create(signer, {
     dbEncryptionKey: encryptionKey,
+    dbPath: getDbPath(XMTP_ENV + "-" + signerIdentifier  ),  
     env: XMTP_ENV as XmtpEnv,
-    loggingLevel: LogLevel.debug,
+    loggingLevel: process.env.LOGGING_LEVEL as LogLevel,
   });
 
   // await client.revokeAllOtherInstallations();
 
-  const identifier = await signer.getIdentifier();
-  const address = identifier.identifier;
-  logAgentDetails(address, client.inboxId, XMTP_ENV);
+  logAgentDetails(client);
 
   console.log("✓ Syncing conversations...");
   await client.conversations.sync();
@@ -259,7 +260,7 @@ async function main() {
       console.log(`Sent key status for ${targetInboxId}`);
     } catch (error) {
       console.error(`Error processing key-check for ${targetInboxId}:`, error);
-      await conversation.send(`Error processing key-check: ${error.message}`);
+      await conversation.send(`Error processing key-check: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
 
     console.log("Waiting for messages...");
