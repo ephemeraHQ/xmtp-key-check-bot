@@ -76,9 +76,7 @@ export const getDbPath = (description: string = "xmtp") => {
   return `${volumePath}/${description}.db3`;
 };
 
-export const logAgentDetails = async (
-  clients: Client<any> | Client<any>[],
-): Promise<void> => {
+export const logAgentDetails = async (clients: Client | Client[]): Promise<void> => {
   const clientsByAddress = Array.isArray(clients)
     ? clients.reduce<Record<string, Client[]>>((acc, client) => {
         const address = client.accountIdentifier?.identifier ?? "";
